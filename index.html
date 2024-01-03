@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rating-container .star {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url('/star-image.png') no-repeat; /* Replace with your star image */
+  background-size: 100%;
+  cursor: pointer;
+}
+
+.rating-container .star.select {
+  background-image: url('/star-full.png'); /* Replace with your filled star image */
+}
+
+    </style>
+</head>
+<body>
+    <h1>hello start</h1>
+    <div class="rating-container">
+        <span class="star" data-value="1"></span>
+        <span class="star" data-value="2"></span>
+        <span class="star" data-value="3"></span>
+        <span class="star" data-value="4"></span>
+        <span class="star" data-value="5"></span>
+      </div>
+      
+</body>
+<script>
+    const ratingContainer = document.querySelector('.rating-container');
+
+ratingContainer.addEventListener('click', (event) => {
+  const star = event.target;
+  const ratingValue = star.dataset.value;
+
+  // Unselect previous stars
+  const selectedStars = ratingContainer.querySelectorAll('.select');
+  selectedStars.forEach(star => star.classList.remove('select'));
+
+  // Select current and previous stars
+  for (let i = 1; i <= ratingValue; i++) {
+    const currentStar = ratingContainer.querySelector(`.star[data-value="${i}"]`);
+    currentStar.classList.add('select');
+  }
+});
+
+</script>
+</html>
